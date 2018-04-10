@@ -22,7 +22,7 @@ mlr.lin <- lm(ofit~timefit)
 summary(mlr.lin)
 plot(mlr.lin)
 #k = 2
-tsqfit=timefit^2/factorial(2)
+tsqfit <- timefit^2/factorial(2)
 mlr.quad <- lm(ofit~timefit+tsqfit)
 summary(mlr.quad)
 plot(mlr.quad)
