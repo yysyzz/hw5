@@ -157,5 +157,7 @@ mean(finaldiff2)
 acf(finaldiff2,max(100))
 pacf(finaldiff2,max(50))
 sarima(work$WORKORDERS,1,2,1)#6.104306 6.08778 6.191969
+#forecast and find the date
 sarima.for(work$WORKORDERS, 200, 1, 2, 1)
-
+abline(v=249)
+summary(work$WORKORDERS)
