@@ -131,18 +131,31 @@ pfore.cub$fit
 
 #ARIMA model
 workdiff1 <- diff(work$WORKORDERS[1:108])
+                  
 ts.plot(workdiff1)
 workdiff12 <- diff(workdiff1)
 ts.plot(workdiff12)
+
+
 acf(workdiff12,max(50))
 pacf(workdiff12,max(100))
-sarima(work$WORKORDERS[1:108],0,1,1)
+sarima(work$WORKORDERS[1:108],0,2,1)
 foredata <- sarima.for(work$WORKORDERS[1:108], 12, 0, 1, 1)
 tresidual <- work$WORKORDERS[109:120]-foredata$pred
-sum(tresidual)/12#ME 57.50273
-100*mean(tresidual/work$WORKORDERS[109:120])#MPE 2.643544
-mean(tresidual^2)#3842.004
+sum(tresidual)/12#ME 57.50273 55.82046
+100*mean(tresidual/work$WORKORDERS[109:120])#MPE 2.643544 2.565986
+mean(tresidual^2)#3842.004 3651.492
 par(mfrow=c(1,1))
-sarima.for(work$WORKORDERS[1:108], 120, 0, 1, 1)
+sarima.for(work$WORKORDERS[1:108], 200, 0, 2, 1)
 
+#use the whole dataset to bulid ARIMA model
+finaldiff1 <- diff(work$WORKORDERS)
+ts.plot(finaldiff1) 
+finaldiff2 <- diff(finaldiff1)
+ts.plot(finaldiff2)
+mean(finaldiff2)
+acf(finaldiff2,max(100))
+pacf(finaldiff2,max(50))
+sarima(work$WORKORDERS,1,2,1)#6.104306 6.08778 6.191969
+sarima.for(work$WORKORDERS, 200, 1, 2, 1)
 
